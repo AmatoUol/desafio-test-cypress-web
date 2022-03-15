@@ -13,10 +13,7 @@
 pipeline {
     //The agent section specifies where the entire Pipeline, or a specific stage, 
     //will execute in the Jenkins environment depending on where the agent section is placed.
-  agent {
-           // this image provides everything needed to run Cypress
-              docker {image 'cypress/base:10'}
-          }  
+  agent any
     //The environment directive specifies a sequence of key-value pairs which will be defined
     //as environment variables for all steps, or stage-specific steps, depending on where the environment directive is located within the Pipeline.
     //environment {
@@ -47,7 +44,11 @@ pipeline {
         
        stage('Build'){
           //The steps section defines a series of one or more steps to be executed in a given stage directive.
-          steps {
+         agent {
+           // this image provides everything needed to run Cypress
+              docker {image 'cypress/base:10'}
+          }   
+         steps {
               echo "Building the application"
          }
     }
